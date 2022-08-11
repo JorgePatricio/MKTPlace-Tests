@@ -1,0 +1,56 @@
+jobs:
+
+  - job: Cypress_api_tests
+    pool: RELEASE-AZ
+    steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '16.x'
+        displayName: 'Install Node.js'
+      
+      - script: npm install
+        displayName: 'Install NPM dependencies'
+
+      - script: npm run apitest
+        displayName: 'Run API Tests'
+      
+        
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '**/results-*.xml'
+          testRunTitle: 'Results API'
+      
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: '$(System.DefaultWorkingDirectory)/cypress/screenshots/'
+          artifact: 'Evidencias - Cypress_api_tests'
+          publishLocation: 'pipeline'
+
+  - job: Cypress_web_tests
+    pool: RELEASE-AZ
+    steps:
+      - task: NodeTool@0
+        inputs:
+          versionSpec: '16.x'
+        displayName: 'Install Node.js'
+      
+      - script: npm install
+        displayName: 'Install NPM dependencies'
+
+      - script: npm run webtest
+        displayName: 'Run Web Tests'
+
+        
+      - task: PublishTestResults@2
+        inputs:
+          testResultsFormat: 'JUnit'
+          testResultsFiles: '**/results-*.xml'
+          testRunTitle: 'Results Web'
+      
+      - task: PublishPipelineArtifact@1
+        inputs:
+          targetPath: '$(System.DefaultWorkingDirectory)/cypress/screenshots/'
+          artifact: 'Evidencias - Cypress_web_tests'
+          publishLocation: 'pipeline'    
+      

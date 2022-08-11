@@ -1,0 +1,40 @@
+{
+    "projectId": "taeb27",
+    "video": false,
+    "viewportWidth": 1440,
+    "viewportHeight": 900,
+    "defaultCommandTimeout": 30000,
+    "baseUrl": "https://marketplacerel.interplayers.com.br/",
+    "apiServer": "https://homologacaomkt.interplayers.com.br/api/relMarketPlace",
+    "env": {
+        "dbConfig": {
+            "server": "10.191.12.4",
+            "user": "sql_desenv",
+            "password": "Jm7s0inwfn",
+            "database": "MKT_REL",
+            "options": {
+                "encrypt": true,
+                "trustServerCertificate": true
+            }
+        }
+    },
+    "reporter": "cypress-multi-reporters",
+    "reporterOptions": {
+        "reporterEnabled": "mochawesome, mocha-junit-reporter",
+        "mochawesomeReporterOptions": {
+            "reportDir": "cypress/reports/mocha",
+            "quite": true,
+            "overwrite": false,
+            "html": true,
+            "json": true,
+            "timestamp": "mmddyyyy_HHMM_ss",
+            "charts": true,
+            "reportPageTitle": "My Test Suite",
+            "embeddedScreenshots": true,
+            "inlineAssets": true
+        },
+    "mochaJunitReporterReporterOptions": {
+        "mochaFile": "cypress/reports/JUNIT-results/results-[hash].xml"
+    }
+    }
+}
